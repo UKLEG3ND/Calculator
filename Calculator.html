@@ -1,9 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title></title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
 <style type="text/css">
-
 body {
 	font-family: arial;
 	background-color: #218559;
@@ -47,101 +48,75 @@ body {
 	color: maroon;
 	margin-top: 12px;
 }
-
 </style>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
-
-   
-
     $("#calcbutton").on("click", function() {
-
-        // obtain user input
         var input1 = $("#num1").val();
         var input2 = $("#num2").val();
         var operation = $("#operation").val();
         var ans;
 
-        // Validate input using regular expression
         var numRegex = /^[0-9]+$/;
         if (!numRegex.test(input1) || !numRegex.test(input2)) {
             $("#output").html("<div>Please enter valid numbers for both fields.</div>");
-            return; // Exit the function
+            return;
         }
 
         var num1 = parseInt(input1);
         var num2 = parseInt(input2);
 
-        // begin output construction
         var msg = "<div>Num1 is " + num1 + "</div>";
         msg += "<div>Num2 is " + num2 + "</div>";
 
-        // determine operation to perform
         if (operation == "add") {
             ans = num1 + num2;
         } else if (operation == "sub") {
-            ans = num1 - num2; // Perform subtraction
+            ans = num1 - num2;
         } else if (operation == "mult") {
             ans = num1 * num2;
-        } else {
+        } else if (operation == "div") {
             ans = num1 / num2;
+        } else if (operation == "square") {
+            ans = num1 * num1;
+        } else if (operation == "sqrt") {
+            ans = Math.sqrt(num1).toFixed(3);
         }
 
-        // finish output construction with last line
         msg += "<div>Answer is " + ans + "</div>";
 
-        // output to browser
         $("#output").html(msg);
-
-    }); // ends click handler
-
-}); // ends document.ready
-
-
+    });
+});
 </script>
-
 </head>
 <body>
-
 <div id="contentwrap">
-
 	<div id="maintitle">Welcome to your favorite Calculator</div>
 	<div id="subtitle">For all your calculation needs!</div>
-
 	<div id="formwrap">
-	
 		<form>
-	
 			<div class="formtext">Please enter first number:</div>
 			<input type="text" id="num1" size="30">
-
 			<div class="formtext">Please enter second number:</div>
 			<input type="text" id="num2" size="30">
-
 			<div class="formtext">Select operation to perform:</div>
 			<select id="operation">
-    <option value="add">Addition</option>
-    <option value="sub">Subtraction</option>
-    <option value="mult">Multiplication</option>
-    <option value="div">Division</option>
+				<option value="add">Addition</option>
+				<option value="sub">Subtraction</option>
+				<option value="mult">Multiplication</option>
+				<option value="div">Division</option>
+				<option value="square">Square</option>
+				<option value="sqrt">Square Root</option>
 			</select>
-
-
 			<div style="margin-top: 15px;">
-				<input type="button" value="Do Math" id="calcbutton">
+				<input type="button" value="Calculate" id="calcbutton">
 			</div>
-			
 		</form>
-		
 		<div id="output"></div>
-
-	</div> <!-- ends div#formwrap -->
-
-</div> <!-- ends div#contentwrap -->
-
+	</div>
+</div>
 </body>
 </html>
