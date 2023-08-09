@@ -60,16 +60,25 @@ $(document).ready(function() {
         var ans;
 
         var numRegex = /^[0-9]+$/;
-        if (!numRegex.test(input1) || !numRegex.test(input2)) {
-            $("#output").html("<div>Please enter valid numbers for both fields.</div>");
-            return;
+        if (operation !== "square" && operation !== "sqrt") {
+            if (!numRegex.test(input1) || !numRegex.test(input2)) {
+                $("#output").html("<div>Please enter valid numbers for both fields.</div>");
+                return;
+            }
+        } else {
+            if (!numRegex.test(input1)) {
+                $("#output").html("<div>Please enter a valid number in the first field.</div>");
+                return;
+            }
         }
 
         var num1 = parseInt(input1);
         var num2 = parseInt(input2);
 
         var msg = "<div>Num1 is " + num1 + "</div>";
-        msg += "<div>Num2 is " + num2 + "</div>";
+        if (num2) {
+            msg += "<div>Num2 is " + num2 + "</div>";
+        }
 
         if (operation == "add") {
             ans = num1 + num2;
@@ -120,3 +129,4 @@ $(document).ready(function() {
 </div>
 </body>
 </html>
+
