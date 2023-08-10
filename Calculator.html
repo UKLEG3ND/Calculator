@@ -61,10 +61,12 @@ $(document).ready(function() {
 
         var numRegex = /^[0-9]+$/;
         if (operation !== "square" && operation !== "sqrt") {
+            var input2 = $("#num2").val();
             if (!numRegex.test(input1) || !numRegex.test(input2)) {
                 $("#output").html("<div>Please enter valid numbers for both fields.</div>");
                 return;
             }
+            var num2 = parseInt(input2);
         } else {
             if (!numRegex.test(input1)) {
                 $("#output").html("<div>Please enter a valid number in the first field.</div>");
@@ -73,10 +75,9 @@ $(document).ready(function() {
         }
 
         var num1 = parseInt(input1);
-        var num2 = parseInt(input2);
 
         var msg = "<div>Num1 is " + num1 + "</div>";
-        if (num2) {
+        if (operation !== "square" && operation !== "sqrt") {
             msg += "<div>Num2 is " + num2 + "</div>";
         }
 
@@ -97,6 +98,15 @@ $(document).ready(function() {
         msg += "<div>Answer is " + ans + "</div>";
 
         $("#output").html(msg);
+    });
+
+    $("#operation").on("change", function() {
+        var selectedOperation = $(this).val();
+        if (selectedOperation === "square" || selectedOperation === "sqrt") {
+            $("#num2").prop("disabled", true);
+        } else {
+            $("#num2").prop("disabled", false);
+        }
     });
 });
 </script>
@@ -129,4 +139,3 @@ $(document).ready(function() {
 </div>
 </body>
 </html>
-
